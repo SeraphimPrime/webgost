@@ -30,10 +30,10 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="favicon.png">
     
-    <!-- Google Fonts - Montserrat и Open Sans -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -71,12 +71,12 @@
             --primary: #4169E1;
             --primary-dark: #3451b2;
             --secondary: #00D4AA;
-            --text: #000000;
-            --text-light: #222222;
-            --bg: #F7FAFC;
+            --text: #1F2937;
+            --text-light: #6B7280;
+            --bg: #F9FAFB;
             --white: #FFFFFF;
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
         html {
@@ -85,18 +85,15 @@
         }
 
         body {
-            font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
             color: var(--text);
             background-color: var(--bg);
             overflow-x: hidden;
-            font-size: clamp(16px, 1.2vw, 18px);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Montserrat', sans-serif;
             font-weight: 700;
             line-height: 1.2;
         }
@@ -107,28 +104,44 @@
             display: block;
         }
 
-        /* Header & Navigation */
+        /* Фиксированный хедер */
         .main-header {
-            background: linear-gradient(135deg, rgba(65, 105, 225, 0.95) 0%, rgba(0, 212, 170, 0.95) 100%);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
+            padding: 1rem 0;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .main-header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             padding: 0.8rem 0;
-            box-shadow: var(--shadow);
+        }
+
+        .main-header.scrolled .logo,
+        .main-header.scrolled .nav-link,
+        .main-header.scrolled .mobile-menu-btn,
+        .main-header.scrolled .mobile-menu-close {
+            color: var(--text);
+        }
+
+        .main-header.scrolled .nav-link.active::after {
+            background: var(--primary);
         }
 
         .header-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 1.5rem;
+            padding: 0 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
         }
 
         .logo {
@@ -137,14 +150,13 @@
             gap: 0.75rem;
             color: var(--white);
             text-decoration: none;
-            font-family: 'Montserrat', sans-serif;
             font-weight: 700;
-            font-size: clamp(1.2rem, 2vw, 1.5rem);
-            z-index: 1001;
+            font-size: 1.1rem;
+            transition: color 0.3s;
         }
 
         .logo i {
-            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            font-size: 1.8rem;
         }
 
         .logo-text {
@@ -154,19 +166,19 @@
         }
 
         .logo-title {
-            font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+            font-size: 1.1rem;
             font-weight: 700;
         }
 
         .logo-subtitle {
-            font-size: clamp(0.8rem, 1.3vw, 1rem);
-            opacity: 0.9;
+            font-size: 0.8rem;
+            opacity: 0.8;
             font-weight: 400;
         }
 
         .nav-menu {
             display: flex;
-            gap: clamp(1rem, 2vw, 2.5rem);
+            gap: 2rem;
             list-style: none;
             align-items: center;
         }
@@ -174,19 +186,17 @@
         .nav-link {
             color: var(--white);
             text-decoration: none;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            font-size: clamp(0.9rem, 1.2vw, 1.1rem);
-            transition: opacity 0.3s;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s;
             padding: 0.5rem 0;
             position: relative;
             cursor: pointer;
-            white-space: nowrap;
         }
 
         .nav-link:hover,
         .nav-link.active {
-            opacity: 0.85;
+            opacity: 1;
         }
 
         .nav-link.active::after {
@@ -197,30 +207,28 @@
             right: 0;
             height: 2px;
             background: var(--white);
+            transition: background 0.3s;
         }
 
         .btn-header {
-            background: var(--white);
-            color: var(--primary);
-            padding: clamp(0.7rem, 1.2vw, 0.9rem) clamp(1rem, 1.8vw, 1.8rem);
-            border-radius: 50px;
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
             text-decoration: none;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+            font-weight: 600;
+            font-size: 0.95rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: var(--shadow);
+            transition: all 0.3s;
             cursor: pointer;
             border: none;
-            white-space: nowrap;
         }
 
         .btn-header:hover {
+            background: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
         }
 
         .mobile-menu-btn {
@@ -228,10 +236,10 @@
             background: none;
             border: none;
             color: var(--white);
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             cursor: pointer;
-            z-index: 1001;
             padding: 0.5rem;
+            transition: color 0.3s;
         }
 
         /* Mobile Menu */
@@ -242,35 +250,39 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 999;
+            background: rgba(0, 0, 0, 0.98);
+            z-index: 1001;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             gap: 2rem;
-            padding: 2rem;
         }
 
         .mobile-menu.active {
             display: flex;
         }
 
-        .mobile-menu .nav-link {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.5rem;
+        .mobile-menu-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
             color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
         }
 
-        .mobile-menu .btn-header {
-            margin-top: 1rem;
+        .mobile-menu .nav-link {
+            color: var(--white) !important;
+            font-size: 1.5rem;
         }
 
         /* Hero Section */
         .hero {
-            margin-top: 70px;
             position: relative;
-            min-height: clamp(500px, 70vh, 700px);
-            background: linear-gradient(135deg, rgba(65, 105, 225, 0.8) 0%, rgba(0, 212, 170, 0.8) 100%);
+            height: 100vh;
+            min-height: 700px;
             overflow: hidden;
         }
 
@@ -290,7 +302,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 50%);
+            background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.4) 100%);
             z-index: 1;
         }
 
@@ -299,8 +311,8 @@
             z-index: 2;
             max-width: 1400px;
             margin: 0 auto;
-            padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem);
-            min-height: clamp(500px, 70vh, 700px);
+            padding: 120px 2rem 0;
+            height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -308,65 +320,66 @@
         }
 
         .hero-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: clamp(2rem, 5vw, 4.5rem);
+            font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 800;
             margin-bottom: 1rem;
             line-height: 1.1;
-            text-shadow: 0 4px 8px rgba(0,0,0,0.4);
-            word-wrap: break-word;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            max-width: 600px;
         }
 
         .hero-subtitle {
-            font-size: clamp(1.1rem, 2.5vw, 1.75rem);
+            font-size: clamp(1rem, 2vw, 1.25rem);
             margin-bottom: 2rem;
             opacity: 0.95;
-            max-width: 800px;
+            max-width: 500px;
             font-weight: 400;
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
         .hero-buttons {
             display: flex;
             gap: 1rem;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
             flex-wrap: wrap;
         }
 
-        .btn-hero-primary,
-        .btn-hero-secondary {
-            padding: clamp(0.9rem, 1.5vw, 1.2rem) clamp(1.5rem, 3vw, 3rem);
-            border-radius: 50px;
+        .btn-hero-primary {
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.9rem 1.8rem;
+            border-radius: 8px;
             text-decoration: none;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+            font-weight: 600;
+            font-size: 1rem;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
             transition: all 0.3s;
             cursor: pointer;
             border: none;
-            white-space: nowrap;
-        }
-
-        .btn-hero-primary {
-            background: var(--primary);
-            color: var(--white);
-            box-shadow: 0 4px 15px rgba(65, 105, 225, 0.4);
         }
 
         .btn-hero-primary:hover {
+            background: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(65, 105, 225, 0.5);
         }
 
         .btn-hero-secondary {
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             color: var(--white);
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 0.9rem 1.8rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
         }
 
         .btn-hero-secondary:hover {
@@ -375,69 +388,77 @@
 
         /* Stats Bar */
         .stats-bar {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: clamp(1rem, 3vw, 2rem) clamp(1rem, 3vw, 3rem);
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: clamp(1rem, 2vw, 2rem);
-            max-width: 1100px;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            display: flex;
+            gap: 0;
+            max-width: 900px;
+            width: 90%;
+            z-index: 2;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            width: 100%;
         }
 
         .stat-item {
             display: flex;
             align-items: center;
             gap: 1rem;
-            min-width: 0;
+            flex: 1;
+            padding: 0 1.5rem;
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-item:last-child {
+            border-right: none;
         }
 
         .stat-icon {
-            width: clamp(40px, 8vw, 60px);
-            height: clamp(40px, 8vw, 60px);
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-size: 1.5rem;
+            color: var(--white);
             flex-shrink: 0;
         }
 
         .stat-content {
             display: flex;
             flex-direction: column;
-            min-width: 0;
         }
 
         .stat-value {
-            font-family: 'Montserrat', sans-serif;
-            font-size: clamp(1.2rem, 3vw, 1.75rem);
+            font-size: 1.25rem;
             font-weight: 700;
             line-height: 1.2;
+            color: var(--white);
         }
 
         .stat-label {
-            font-size: clamp(0.8rem, 1.5vw, 1rem);
+            font-size: 0.85rem;
             opacity: 0.9;
-            line-height: 1.2;
+            color: var(--white);
         }
 
         /* Container */
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: clamp(2rem, 5vw, 5rem) clamp(1rem, 3vw, 2rem);
+            padding: clamp(2.5rem, 5vw, 5rem) clamp(1.2rem, 3vw, 2rem);
         }
 
         /* Section Headers */
         .section-label {
             color: var(--primary);
             font-family: 'Montserrat', sans-serif;
-            font-size: clamp(0.9rem, 1.5vw, 1rem);
+            font-size: clamp(0.95rem, 1.5vw, 1.05rem);
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.05em;
@@ -446,7 +467,7 @@
 
         .section-title {
             font-family: 'Montserrat', sans-serif;
-            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-size: clamp(1.9rem, 4vw, 3rem);
             font-weight: 800;
             color: var(--text);
             margin-bottom: 2rem;
@@ -465,12 +486,12 @@
         .btn-compare {
             background: var(--bg);
             color: var(--text);
-            padding: clamp(0.7rem, 1.2vw, 1rem) clamp(1.2rem, 2vw, 2rem);
+            padding: clamp(0.75rem, 1.2vw, 1rem) clamp(1.2rem, 2vw, 2rem);
             border-radius: 50px;
             text-decoration: none;
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
-            font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+            font-size: clamp(0.95rem, 1.3vw, 1.1rem);
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
@@ -489,7 +510,7 @@
         .hotels-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-            gap: clamp(1.5rem, 3vw, 2.5rem);
+            gap: clamp(1.8rem, 3vw, 2.5rem);
             margin-bottom: 5rem;
         }
 
@@ -511,7 +532,7 @@
 
         .hotel-image-wrapper {
             position: relative;
-            height: clamp(200px, 30vw, 280px);
+            height: clamp(220px, 30vw, 280px);
             overflow: hidden;
         }
 
@@ -531,11 +552,11 @@
             top: 1rem;
             left: 1rem;
             background: var(--white);
-            padding: clamp(0.5rem, 1vw, 0.7rem) clamp(0.8rem, 1.5vw, 1.2rem);
+            padding: clamp(0.6rem, 1vw, 0.7rem) clamp(0.9rem, 1.5vw, 1.2rem);
             border-radius: 50px;
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
-            font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+            font-size: clamp(0.95rem, 1.5vw, 1.05rem);
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -548,7 +569,7 @@
         }
 
         .hotel-content {
-            padding: clamp(1.5rem, 3vw, 2.5rem);
+            padding: clamp(1.8rem, 3vw, 2.5rem);
             display: flex;
             flex-direction: column;
             flex-grow: 1;
@@ -556,14 +577,14 @@
 
         .hotel-type {
             color: var(--text-light);
-            font-size: clamp(0.9rem, 1.3vw, 1rem);
+            font-size: clamp(0.95rem, 1.3vw, 1.05rem);
             margin-bottom: 0.5rem;
             font-weight: 600;
         }
 
         .hotel-name {
             font-family: 'Montserrat', sans-serif;
-            font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+            font-size: clamp(1.4rem, 2.5vw, 1.75rem);
             font-weight: 800;
             color: var(--text);
             margin-bottom: 0.8rem;
@@ -575,7 +596,7 @@
             align-items: center;
             gap: 0.5rem;
             color: var(--text-light);
-            font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+            font-size: clamp(0.95rem, 1.3vw, 1.1rem);
             margin-bottom: 1rem;
             flex-wrap: wrap;
         }
@@ -587,7 +608,7 @@
 
         .hotel-description {
             color: var(--text-light);
-            font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+            font-size: clamp(0.95rem, 1.3vw, 1.1rem);
             line-height: 1.6;
             margin-bottom: 1.2rem;
             flex-grow: 1;
@@ -596,7 +617,7 @@
         .hotel-features {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: clamp(0.5rem, 1vw, 0.75rem);
+            gap: clamp(0.6rem, 1vw, 0.75rem);
             margin-bottom: 1.2rem;
         }
 
@@ -604,14 +625,14 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: clamp(0.85rem, 1.2vw, 1rem);
+            font-size: clamp(0.9rem, 1.2vw, 1.05rem);
             color: var(--text-light);
             font-weight: 500;
         }
 
         .hotel-feature i {
             color: var(--primary);
-            font-size: clamp(1rem, 1.5vw, 1.1rem);
+            font-size: clamp(1.05rem, 1.5vw, 1.15rem);
             flex-shrink: 0;
         }
 
@@ -620,7 +641,7 @@
             text-decoration: none;
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
-            font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+            font-size: clamp(1rem, 1.4vw, 1.15rem);
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
@@ -636,15 +657,15 @@
         .why-us {
             background: var(--white);
             border-radius: 30px;
-            padding: clamp(2rem, 5vw, 5rem) clamp(1.5rem, 3vw, 5rem);
+            padding: clamp(2.5rem, 5vw, 5rem) clamp(1.8rem, 3vw, 5rem);
             margin-bottom: 5rem;
             box-shadow: var(--shadow);
         }
 
         .why-us-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: clamp(1.5rem, 3vw, 3rem);
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: clamp(1.8rem, 3vw, 3rem);
         }
 
         .why-item {
@@ -652,21 +673,21 @@
         }
 
         .why-icon {
-            width: clamp(60px, 10vw, 90px);
-            height: clamp(60px, 10vw, 90px);
+            width: clamp(65px, 10vw, 90px);
+            height: clamp(65px, 10vw, 90px);
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 1.5rem;
-            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-size: clamp(1.6rem, 3vw, 2.5rem);
             color: var(--white);
         }
 
         .why-title {
             font-family: 'Montserrat', sans-serif;
-            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            font-size: clamp(1.15rem, 2vw, 1.35rem);
             font-weight: 700;
             color: var(--text);
             margin-bottom: 0.75rem;
@@ -674,7 +695,7 @@
 
         .why-text {
             color: var(--text-light);
-            font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+            font-size: clamp(0.95rem, 1.4vw, 1.1rem);
             line-height: 1.6;
         }
 
@@ -708,7 +729,7 @@
             text-decoration: none;
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
-            font-size: clamp(1rem, 1.5vw, 1.15rem);
+            font-size: clamp(1.05rem, 1.5vw, 1.2rem);
             margin-bottom: 2rem;
             transition: gap 0.3s;
             cursor: pointer;
@@ -721,7 +742,7 @@
         .hotel-detail-header {
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             border-radius: 20px;
-            padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 3vw, 3rem);
+            padding: clamp(2.5rem, 5vw, 4rem) clamp(1.8rem, 3vw, 3rem);
             color: var(--white);
             margin-bottom: 3rem;
             text-align: center;
@@ -729,27 +750,27 @@
 
         .hotel-detail-header h1 {
             font-family: 'Montserrat', sans-serif;
-            font-size: clamp(1.8rem, 4vw, 3.5rem);
+            font-size: clamp(1.9rem, 4vw, 3.5rem);
             margin-bottom: 1rem;
             line-height: 1.2;
         }
 
         .hotel-detail-header p {
-            font-size: clamp(1rem, 2vw, 1.4rem);
+            font-size: clamp(1.05rem, 2vw, 1.45rem);
             opacity: 0.9;
         }
 
         .content-section {
             background: var(--white);
             border-radius: 20px;
-            padding: clamp(1.5rem, 4vw, 4rem);
+            padding: clamp(1.8rem, 4vw, 4rem);
             margin-bottom: 2.5rem;
             box-shadow: var(--shadow);
         }
 
         .content-section h2 {
             font-family: 'Montserrat', sans-serif;
-            font-size: clamp(1.5rem, 3vw, 2.25rem);
+            font-size: clamp(1.6rem, 3vw, 2.35rem);
             color: var(--text);
             margin-bottom: 1.2rem;
         }
@@ -758,13 +779,13 @@
             color: var(--text-light);
             line-height: 1.8;
             margin-bottom: 1rem;
-            font-size: clamp(1rem, 1.6vw, 1.2rem);
+            font-size: clamp(1.05rem, 1.6vw, 1.25rem);
         }
 
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
-            gap: clamp(1rem, 2vw, 2rem);
+            gap: clamp(1.2rem, 2vw, 2rem);
         }
 
         .gallery-item {
@@ -772,6 +793,12 @@
             overflow: hidden;
             aspect-ratio: 4/3;
             box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
         }
 
         .gallery-item img {
@@ -785,24 +812,108 @@
             transform: scale(1.05);
         }
 
+        /* Mobile Gallery Slider */
+        .mobile-gallery-slider {
+            display: none;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+        }
+
+        .mobile-gallery-slider.active {
+            display: block;
+        }
+
+        .slider-container {
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+
+        .slider-item {
+            min-width: 100%;
+            aspect-ratio: 4/3;
+        }
+
+        .slider-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        .slider-controls {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .slider-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .slider-dot.active {
+            background: var(--white);
+        }
+
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--primary);
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .slider-arrow:hover {
+            background: var(--white);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider-arrow.prev {
+            left: 1rem;
+        }
+
+        .slider-arrow.next {
+            right: 1rem;
+        }
+
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: clamp(1.5rem, 3vw, 3rem);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: clamp(1.8rem, 3vw, 3rem);
             margin-bottom: 2.5rem;
         }
 
         .info-card {
             background: var(--bg);
             border-radius: 15px;
-            padding: clamp(1.5rem, 3vw, 2.5rem);
+            padding: clamp(1.8rem, 3vw, 2.5rem);
         }
 
         .info-card h3 {
             font-family: 'Montserrat', sans-serif;
             color: var(--primary);
             margin-bottom: 1.2rem;
-            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            font-size: clamp(1.25rem, 2vw, 1.55rem);
             display: flex;
             align-items: center;
             gap: 0.75rem;
@@ -814,10 +925,10 @@
         }
 
         .info-card li {
-            padding: clamp(0.7rem, 1.2vw, 1rem) 0;
+            padding: clamp(0.75rem, 1.2vw, 1.05rem) 0;
             border-bottom: 1px solid #E2E8F0;
             color: var(--text-light);
-            font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+            font-size: clamp(0.95rem, 1.4vw, 1.1rem);
             line-height: 1.5;
         }
 
@@ -829,19 +940,19 @@
             color: var(--text);
             display: block;
             margin-bottom: 0.25rem;
-            font-size: clamp(1rem, 1.5vw, 1.1rem);
+            font-size: clamp(1.05rem, 1.5vw, 1.15rem);
         }
 
         /* Action Buttons */
         .action-buttons {
             display: flex;
-            gap: 1rem;
-            margin: 2rem 0;
+            gap: 1.2rem;
+            margin: 2.5rem 0;
             flex-wrap: wrap;
         }
 
         .btn {
-            padding: clamp(0.9rem, 1.5vw, 1.2rem) clamp(1.5rem, 3vw, 3rem);
+            padding: clamp(0.95rem, 1.5vw, 1.25rem) clamp(1.8rem, 3vw, 3rem);
             border-radius: 50px;
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
@@ -853,7 +964,7 @@
             transition: all 0.3s;
             border: none;
             cursor: pointer;
-            font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
             white-space: nowrap;
         }
 
@@ -884,12 +995,12 @@
             width: 100%;
             border-collapse: collapse;
             margin-top: 1.5rem;
-            font-size: clamp(0.9rem, 1.4vw, 1.15rem);
+            font-size: clamp(0.95rem, 1.4vw, 1.2rem);
         }
 
         .price-table th,
         .price-table td {
-            padding: clamp(0.8rem, 1.5vw, 1.5rem);
+            padding: clamp(0.9rem, 1.5vw, 1.5rem);
             text-align: left;
             border-bottom: 2px solid #E2E8F0;
         }
@@ -907,7 +1018,7 @@
 
         .price-highlight {
             font-family: 'Montserrat', sans-serif;
-            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            font-size: clamp(1.15rem, 2vw, 1.45rem);
             color: var(--primary);
             font-weight: 800;
         }
@@ -915,14 +1026,14 @@
         /* Contact Section */
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: clamp(1rem, 2vw, 2rem);
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: clamp(1.2rem, 2vw, 2rem);
             margin-top: 2rem;
         }
 
         .contact-item {
             text-align: center;
-            padding: clamp(1.5rem, 3vw, 2.5rem);
+            padding: clamp(1.8rem, 3vw, 2.5rem);
             background: var(--bg);
             border-radius: 15px;
         }
@@ -931,7 +1042,7 @@
             font-family: 'Montserrat', sans-serif;
             color: var(--text);
             margin-bottom: 0.75rem;
-            font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+            font-size: clamp(1.15rem, 1.8vw, 1.35rem);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -944,7 +1055,7 @@
             text-decoration: none;
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
-            font-size: clamp(1.1rem, 1.8vw, 1.25rem);
+            font-size: clamp(1.15rem, 1.8vw, 1.3rem);
             word-break: break-all;
         }
 
@@ -979,7 +1090,7 @@
         .main-footer {
             background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
             color: var(--white);
-            padding: clamp(3rem, 5vw, 5rem) clamp(1rem, 3vw, 2rem) 2rem;
+            padding: clamp(3.5rem, 5vw, 5rem) clamp(1.2rem, 3vw, 2rem) 2rem;
             margin-top: 5rem;
         }
 
@@ -987,15 +1098,15 @@
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: clamp(2rem, 4vw, 4rem);
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: clamp(2.5rem, 4vw, 4rem);
             margin-bottom: 3rem;
         }
 
         .footer-section h3 {
             font-family: 'Montserrat', sans-serif;
             margin-bottom: 1.2rem;
-            font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+            font-size: clamp(1.15rem, 1.8vw, 1.35rem);
         }
 
         .footer-section p,
@@ -1003,7 +1114,7 @@
             color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
             line-height: 1.8;
-            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+            font-size: clamp(1rem, 1.5vw, 1.15rem);
             display: block;
             margin-bottom: 0.5rem;
             word-break: break-word;
@@ -1020,14 +1131,14 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
             color: rgba(255, 255, 255, 0.6);
-            font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+            font-size: clamp(0.95rem, 1.4vw, 1.1rem);
         }
 
         /* Social Icons */
         .social-icons {
             position: fixed;
-            right: clamp(1rem, 2vw, 2rem);
-            bottom: clamp(1rem, 2vw, 2rem);
+            right: clamp(1.2rem, 2vw, 2rem);
+            bottom: clamp(1.2rem, 2vw, 2rem);
             display: flex;
             flex-direction: column;
             gap: 1rem;
@@ -1035,14 +1146,14 @@
         }
 
         .social-icon {
-            width: clamp(50px, 8vw, 60px);
-            height: clamp(50px, 8vw, 60px);
+            width: clamp(55px, 8vw, 65px);
+            height: clamp(55px, 8vw, 65px);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--white);
-            font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+            font-size: clamp(1.4rem, 2.5vw, 1.85rem);
             transition: transform 0.3s;
             box-shadow: var(--shadow-lg);
             text-decoration: none;
@@ -1062,6 +1173,120 @@
 
         .social-icon.telegram {
             background: #0088cc;
+        }
+
+        .social-icon.max {
+            background: #ffffff;
+            padding: 10px;
+        }
+
+        .social-icon.max img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        /* Lightbox Modal */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 95vw;
+            max-height: 95vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .lightbox-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .lightbox-arrow:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-arrow.prev {
+            left: 2rem;
+        }
+
+        .lightbox-arrow.next {
+            right: 2rem;
+        }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--white);
+            font-size: 1.1rem;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
         }
 
         /* Modal */
@@ -1108,27 +1333,27 @@
         }
 
         .modal-header {
-            padding: clamp(1.5rem, 3vw, 2.5rem);
+            padding: clamp(1.8rem, 3vw, 2.5rem);
             border-bottom: 2px solid var(--bg);
         }
 
         .modal-header h2 {
             font-family: 'Montserrat', sans-serif;
-            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-size: clamp(1.6rem, 3vw, 2.1rem);
             color: var(--text);
         }
 
         .modal-close {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
+            top: 1.2rem;
+            right: 1.2rem;
             background: none;
             border: none;
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--text-light);
             cursor: pointer;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1143,7 +1368,7 @@
         }
 
         .modal-body {
-            padding: clamp(1.5rem, 3vw, 2.5rem);
+            padding: clamp(1.8rem, 3vw, 2.5rem);
         }
 
         .form-group {
@@ -1156,16 +1381,16 @@
             color: var(--text);
             font-family: 'Montserrat', sans-serif;
             font-weight: 600;
-            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+            font-size: clamp(1rem, 1.5vw, 1.15rem);
         }
 
         .form-control {
             width: 100%;
-            padding: clamp(0.8rem, 1.3vw, 1rem);
+            padding: clamp(0.85rem, 1.3vw, 1.05rem);
             border: 2px solid #E2E8F0;
             border-radius: 10px;
-            font-family: 'Open Sans', sans-serif;
-            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(1rem, 1.5vw, 1.15rem);
             transition: border-color 0.3s;
         }
 
@@ -1182,7 +1407,7 @@
         .form-row {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 1rem;
+            gap: 1.2rem;
         }
 
         /* Responsive Breakpoints */
@@ -1216,13 +1441,12 @@
 
         @media (max-width: 768px) {
             .hero {
-                margin-top: 60px;
                 min-height: 500px;
             }
 
             .hero-content {
                 min-height: 500px;
-                padding: 2rem 1rem;
+                padding: 100px 1rem 0;
             }
 
             .hero-buttons {
@@ -1237,12 +1461,23 @@
             }
 
             .stats-bar {
-                grid-template-columns: 1fr;
-                padding: 1.5rem;
+                bottom: 1.5rem;
+                width: 95%;
+                padding: 1.2rem;
+                flex-direction: column;
+                gap: 1rem;
             }
 
             .stat-item {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+                padding: 0 0 1rem 0;
                 justify-content: center;
+            }
+
+            .stat-item:last-child {
+                border-bottom: none;
+                padding-bottom: 0;
             }
 
             .section-header {
@@ -1266,9 +1501,18 @@
                 grid-template-columns: 1fr;
             }
 
-            .footer-content {
-                grid-template-columns: 1fr;
+            .footer-section {
                 text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-section a {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
             }
 
             .action-buttons {
@@ -1284,17 +1528,21 @@
             }
 
             .gallery-grid {
-                grid-template-columns: 1fr;
+                display: none;
+            }
+
+            .mobile-gallery-slider {
+                display: block;
             }
         }
 
         @media (max-width: 480px) {
             html {
-                font-size: 14px;
+                font-size: 14.5px;
             }
 
             body {
-                font-size: 16px;
+                font-size: 16.5px;
             }
 
             .hero {
@@ -1311,13 +1559,27 @@
 
             .price-table th,
             .price-table td {
-                padding: 0.8rem 0.5rem;
-                font-size: 0.9rem;
+                padding: 0.9rem 0.6rem;
+                font-size: 0.95rem;
             }
 
             .modal-content {
-                margin: 0.5rem;
+                margin: 0.6rem;
                 max-height: 95vh;
+            }
+
+            .lightbox-arrow {
+                width: 50px;
+                height: 50px;
+                font-size: 1.6rem;
+            }
+
+            .lightbox-arrow.prev {
+                left: 1rem;
+            }
+
+            .lightbox-arrow.next {
+                right: 1rem;
             }
         }
 
@@ -1339,7 +1601,8 @@
             .main-header,
             .social-icons,
             .btn,
-            .modal {
+            .modal,
+            .lightbox {
                 display: none !important;
             }
 
@@ -1357,7 +1620,7 @@
 </head>
 <body>
     <!-- Header -->
-    <header class="main-header">
+    <header class="main-header" id="mainHeader">
         <div class="header-container">
             <a href="#home" class="logo" onclick="navigateTo('home'); return false;">
                 <i class="fas fa-home"></i>
@@ -1373,6 +1636,7 @@
                     <li><a class="nav-link" data-page="landariya">Ландария</a></li>
                     <li><a class="nav-link" data-page="granat">Гранат</a></li>
                     <li><a class="nav-link" data-page="rechnaya">Речная заводь</a></li>
+                    <li><a class="nav-link" onclick="scrollToFooter()">Контакты</a></li>
                 </ul>
             </nav>
             
@@ -1381,7 +1645,7 @@
                 Забронировать
             </button>
 
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Открыть меню">
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
@@ -1389,10 +1653,12 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" onclick="toggleMobileMenu()"><i class="fas fa-times"></i></button>
         <a class="nav-link" data-page="home" onclick="toggleMobileMenu()">Главная</a>
         <a class="nav-link" data-page="landariya" onclick="toggleMobileMenu()">Ландария</a>
         <a class="nav-link" data-page="granat" onclick="toggleMobileMenu()">Гранат</a>
         <a class="nav-link" data-page="rechnaya" onclick="toggleMobileMenu()">Речная заводь</a>
+        <a class="nav-link" onclick="scrollToFooter(); toggleMobileMenu()">Контакты</a>
         <button class="btn-header" onclick="openModal('booking-modal'); toggleMobileMenu()">
             <i class="fas fa-calendar-check"></i>
             Забронировать
@@ -1403,56 +1669,58 @@
     <section class="hero">
         <img src="https://avatars.mds.yandex.net/get-altay/14782168/2a000001987447e019ff30bbe239f3779609/orig" alt="Архипо-Осиповка" class="hero-image">
         <div class="hero-overlay"></div>
+        
         <div class="hero-content">
-            <h1 class="hero-title">Отдых мечты на Чёрном море</h1>
-            <p class="hero-subtitle">Три уютных гостевых дома в живописной Архипо-Осиповке ждут вас!</p>
+            <h1 class="hero-title">Отдых мечты<br>на Чёрном море</h1>
+            <p class="hero-subtitle">Три уютных гостевых дома<br>в живописной Архипо-Осиповке ждут вас!</p>
             <div class="hero-buttons">
-                <button class="btn-hero-primary" onclick="navigateTo('home')">
+                <button class="btn-hero-primary" onclick="document.getElementById('hotels-section').scrollIntoView({behavior: 'smooth'})">
                     Выбрать жильё
                     <i class="fas fa-arrow-right"></i>
                 </button>
                 <button class="btn-hero-secondary" onclick="document.getElementById('scenic-photos').scrollIntoView({behavior: 'smooth'})">
-                    <i class="fas fa-images"></i>
+                    <i class="fas fa-play"></i>
                     Смотреть фото
                 </button>
             </div>
-            
-            <div class="stats-bar">
-                <div class="stat-item">
-                    <div class="stat-icon">
-                        <i class="fas fa-umbrella-beach"></i>
-                    </div>
-                    <div class="stat-content">
-                        <span class="stat-value">1 км</span>
-                        <span class="stat-label">до моря</span>
-                    </div>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fas fa-umbrella-beach"></i>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-icon">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="stat-content">
-                        <span class="stat-value">9.8</span>
-                        <span class="stat-label">средний рейтинг</span>
-                    </div>
+                <div class="stat-content">
+                    <span class="stat-value">1км</span>
+                    <span class="stat-label">до моря</span>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-icon">
-                        <i class="fas fa-comments"></i>
-                    </div>
-                    <div class="stat-content">
-                        <span class="stat-value">150+</span>
-                        <span class="stat-label">отзывов гостей</span>
-                    </div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fas fa-star"></i>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-icon">
-                        <i class="fas fa-history"></i>
-                    </div>
-                    <div class="stat-content">
-                        <span class="stat-value">С 2016</span>
-                        <span class="stat-label">года принимаем гостей</span>
-                    </div>
+                <div class="stat-content">
+                    <span class="stat-value">9.8</span>
+                    <span class="stat-label">средний рейтинг</span>
+                </div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-content">
+                    <span class="stat-value">150+</span>
+                    <span class="stat-label">отзывов гостей</span>
+                </div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="stat-content">
+                    <span class="stat-value">с 2016 г.</span>
+                    <span class="stat-label">принимаем гостей</span>
                 </div>
             </div>
         </div>
@@ -1462,142 +1730,148 @@
     <div class="container">
         <!-- Home Page -->
         <div id="home" class="page active">
-            <div class="section-header">
-                <div>
-                    <div class="section-label">НАШИ ДОМА</div>
-                    <h2 class="section-title">Выберите идеальное место<br>для вашего отдыха</h2>
+            <div id="hotels-section">
+                <div class="section-header">
+                    <div>
+                        <div class="section-label">НАШИ ДОМА</div>
+                        <h2 class="section-title">Выберите идеальное место<br>для вашего отдыха</h2>
+                    </div>
+                    <button class="btn-compare">
+                        <i class="fas fa-balance-scale"></i>
+                        Сравнить дома
+                    </button>
                 </div>
-            </div>
 
-            <div class="hotels-grid">
-                <article class="hotel-card" onclick="navigateTo('landariya')">
-                    <div class="hotel-image-wrapper">
-                        <img src="https://azur.ru/data/o/99/15299/1_5.jpg?1531485892" alt="Гостевой дом Ландария">
-                        <div class="hotel-rating">
-                            <i class="fas fa-star"></i>
-                            9.81
-                        </div>
-                    </div>
-                    <div class="hotel-content">
-                        <div class="hotel-type">Гостевой дом</div>
-                        <h3 class="hotel-name">Ландария</h3>
-                        <div class="hotel-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            пер. Дружный, 3
-                        </div>
-                        <p class="hotel-description">
-                            Трёхэтажный дом в тихом месте. Без транзитного транспорта. Комфортные номера.
-                        </p>
-                        <div class="hotel-features">
-                            <div class="hotel-feature">
-                                <i class="fas fa-parking"></i>
-                                Парковка
-                            </div>
-                            <div class="hotel-feature">
-                                <i class="fas fa-snowflake"></i>
-                                Кондиционер
-                            </div>
-                            <div class="hotel-feature">
-                                <i class="fas fa-wifi"></i>
-                                Wi-Fi
-                            </div>
-                            <div class="hotel-feature">
-                                <i class="fas fa-shuttle-van"></i>
-                                Трансфер
+                <div class="hotels-grid">
+                    <article class="hotel-card" onclick="navigateTo('landariya')">
+                        <div class="hotel-image-wrapper">
+                            <img src="https://azur.ru/data/o/99/15299/1_5.jpg?1531485892" alt="Гостевой дом Ландария">
+                            <div class="hotel-rating">
+                                9.81
+                                <i class="fas fa-star"></i>
                             </div>
                         </div>
-                        <a class="hotel-link" onclick="event.stopPropagation(); navigateTo('landariya')">
-                            Подробнее о доме
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </article>
+                        <div class="hotel-content">
+                            <div class="hotel-type">Гостевой дом</div>
+                            <h3 class="hotel-name">Ландария</h3>
+                            <div class="hotel-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                пер. Дружный, 3
+                            </div>
+                            <p class="hotel-description">
+                                Трёхэтажный дом в тихом месте без транзитного транспорта. Рядом магазины, кафе, набережная с парком аттракционов и аквапарком.
+                            </p>
+                            <div class="hotel-features">
+                                <div class="hotel-feature">
+                                    <i class="fas fa-parking"></i>
+                                    Парковка
+                                </div>
+                                <div class="hotel-feature">
+                                    <i class="fas fa-utensils"></i>
+                                    Шведский стол
+                                </div>
+                                <div class="hotel-feature">
+                                    <i class="fas fa-wifi"></i>
+                                    Wi-Fi
+                                </div>
+                                <div class="hotel-feature">
+                                    <i class="fas fa-swimming-pool"></i>
+                                    Бассейн
+                                </div>
+                            </div>
+                            <a class="hotel-link" onclick="event.stopPropagation(); navigateTo('landariya')">
+                                Подробнее о доме
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
 
-                <article class="hotel-card" onclick="navigateTo('granat')">
-                    <div class="hotel-image-wrapper">
-                        <img src="https://azur.ru/data/o/63/25663/img_0595.jpg?1688546844" alt="Гостевой дом Гранат">
-                        <div class="hotel-rating">
-                            <i class="fas fa-star"></i>
-                            9.67
-                        </div>
-                    </div>
-                    <div class="hotel-content">
-                        <div class="hotel-type">Гостевой дом</div>
-                        <h3 class="hotel-name">Гранат</h3>
-                        <div class="hotel-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            ул. Рабочая, 13
-                        </div>
-                        <p class="hotel-description">
-                            Новый гостевой дом в центральной части курорта. Просторные двухкомнатные номера.
-                        </p>
-                        <div class="hotel-features">
-                            <div class="hotel-feature">
-                                <i class="fas fa-swimming-pool"></i>
-                                Бассейн
-                            </div>
-                            <div class="hotel-feature">
-                                <i class="fas fa-parking"></i>
-                                Парковка
-                            </div>
-                            <div class="hotel-feature">
-                                <i class="fas fa-snowflake"></i>
-                                Кондиционер
-                            </div>
-                            <div class="hotel-feature">
-                                <i class="fas fa-shuttle-van"></i>
-                                Трансфер
+                    <article class="hotel-card" onclick="navigateTo('granat')">
+                        <div class="hotel-image-wrapper">
+                            <img src="https://azur.ru/data/o/63/25663/img_0595.jpg?1688546844" alt="Гостевой дом Гранат">
+                            <div class="hotel-rating">
+                                9.67
+                                <i class="fas fa-star"></i>
                             </div>
                         </div>
-                        <a class="hotel-link" onclick="event.stopPropagation(); navigateTo('granat')">
-                            Подробнее о доме
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </article>
+                        <div class="hotel-content">
+                            <div class="hotel-type">Гостевой дом</div>
+                            <h3 class="hotel-name">Гранат</h3>
+                            <div class="hotel-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                ул. Рабочая, 13
+                            </div>
+                            <p class="hotel-description">
+                                Совершенно новый гостевой дом в центре курорта. Двухкомнатные просторные номера с кухней и гостиной.
+                            </p>
+                            <div class="hotel-features">
+                                <div class="hotel-feature">
+                                    <i class="fas fa-swimming-pool"></i>
+                                    Бассейн
+                                </div>
+                                <div class="hotel-feature">
+                                    <i class="fas fa-parking"></i>
+                                    Парковка
+                                </div>
+                                <div class="hotel-feature">
+                                    <i class="fas fa-snowflake"></i>
+                                    Кондиционер
+                                </div>
+                                <div class="hotel-feature">
+                                    <i class="fas fa-shuttle-van"></i>
+                                    Трансфер
+                                </div>
+                            </div>
+                            <a class="hotel-link" onclick="event.stopPropagation(); navigateTo('granat')">
+                                Подробнее о доме
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
 
-                <article class="hotel-card" onclick="navigateTo('rechnaya')">
-                    <div class="hotel-image-wrapper">
-                        <img src="https://azur.ru/data/o/85/4385/dsc_0102.jpg?1531478017" alt="Гостевой дом Речная заводь">
-                        <div class="hotel-rating" style="background: #48BB78; color: white;">
-                            <i class="fas fa-star" style="color: white;"></i>
-                            9.77
-                        </div>
-                    </div>
-                    <div class="hotel-content">
-                        <div class="hotel-type">Гостевой дом</div>
-                        <h3 class="hotel-name">Речная заводь</h3>
-                        <div class="hotel-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            ул. Вишневая, 65
-                        </div>
-                        <p class="hotel-description">
-                            Расположен на берегу реки Вулан. Номера с кухней и трёхкомнатный коттедж.
-                        </p>
-                        <div class="hotel-features">
-                            <div class="hotel-feature">
-                                <i class="fas fa-parking"></i>
-                                Парковка
-                            </div>
-                            <div class="hotel-feature">
-                                <i class="fas fa-snowflake"></i>
-                                Кондиционер
-                            </div>
-                            <div class="hotel-feature">
-                                <i class="fas fa-utensils"></i>
-                                Кухня
-                            </div>
-                            <div class="hotel-feature">
-                                <i class="fas fa-ship"></i>
-                                Морские прогулки
+                    <article class="hotel-card" onclick="navigateTo('rechnaya')">
+                        <div class="hotel-image-wrapper">
+                            <img src="https://azur.ru/data/o/85/4385/dsc_0102.jpg?1531478017" alt="Гостевой дом Речная заводь">
+                            <div class="hotel-rating" style="background: #10B981; color: white;">
+                                9.77
+                                <i class="fas fa-star"></i>
                             </div>
                         </div>
-                        <a class="hotel-link" onclick="event.stopPropagation(); navigateTo('rechnaya')">
-                            Подробнее о доме
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </article>
+                        <div class="hotel-content">
+                            <div class="hotel-type">Гостевой дом</div>
+                            <h3 class="hotel-name">Речная заводь</h3>
+                            <div class="hotel-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                ул. Вишневая, 65
+                            </div>
+                            <p class="hotel-description">
+                                Расположен на берегу реки Вулан. Номера с кухней и трёхкомнатный коттедж. Морские прогулки.
+                            </p>
+                            <div class="hotel-features">
+                                <div class="hotel-feature">
+                                    <i class="fas fa-parking"></i>
+                                    Парковка
+                                </div>
+                                <div class="hotel-feature">
+                                    <i class="fas fa-snowflake"></i>
+                                    Кондиционер
+                                </div>
+                                <div class="hotel-feature">
+                                    <i class="fas fa-wifi"></i>
+                                    Wi-Fi
+                                </div>
+                                <div class="hotel-feature">
+                                    <i class="fas fa-ship"></i>
+                                    Морские прогулки
+                                </div>
+                            </div>
+                            <a class="hotel-link" onclick="event.stopPropagation(); navigateTo('rechnaya')">
+                                Подробнее о доме
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                </div>
             </div>
 
             <!-- Why Us Section -->
@@ -1641,30 +1915,117 @@
             <div id="scenic-photos">
                 <div class="section-label">ГАЛЕРЕЯ</div>
                 <h2 class="section-title">Красоты Архипо-Осиповки</h2>
+                
+                <!-- Mobile Gallery Slider -->
+                <div class="mobile-gallery-slider" id="mobileGallery">
+                    <div class="slider-container" id="sliderContainer">
+                        <div class="slider-item">
+                            <img src="./photo_5424685901675174729_y.jpg" alt="Закат на море" onclick="openLightbox(0)">
+                        </div>
+                        <div class="slider-item">
+                            <img src="./photo_5424685901675174730_y.jpg" alt="Парк развлечений" onclick="openLightbox(1)">
+                        </div>
+                        <div class="slider-item">
+                            <img src="https://s.101hotelscdn.ru/uploads/image/hotel_image/604573/6198509.jpg" alt="Пляж" onclick="openLightbox(2)">
+                        </div>
+                        <div class="slider-item">
+                            <img src="./photo_5424685901675174733_y.jpg" alt="Горы и море" onclick="openLightbox(3)">
+                        </div>
+                        <div class="slider-item">
+                            <img src="./photo_5424890539686961591_x.jpg" alt="Дельфины" onclick="openLightbox(4)">
+                        </div>
+                        <div class="slider-item">
+                            <img src="https://i.ytimg.com/vi/fAUhIB5lL6E/maxresdefault.jpg" alt="Архипо-Осиповка" onclick="openLightbox(5)">
+                        </div>
+                        <div class="slider-item">
+                            <img src="https://avatars.mds.yandex.net/get-vertis-journal/4080458/14124124142412.jpg_1713271282863/orig" alt="" onclick="openLightbox(6)">
+                        </div>
+                        <div class="slider-item">
+                            <img src="https://otel-more.com/files/2015/10/arhipo-osipovka-center.jpg" alt="" onclick="openLightbox(7)">
+                        </div>
+                        <div class="slider-item">
+                            <img src="https://gelpriboy.ru/wp-content/uploads/2024/08/20240728094811_img_1606.jpg" alt="" onclick="openLightbox(8)">
+                        </div>
+                        <div class="slider-item">
+                            <img src="./252d7ad7-04d9-4763-8bad-61bbc96d1d7f.jfif" alt="" onclick="openLightbox(9)">
+                        </div>
+                        <div class="slider-item">
+                            <img src="https://api.geometki.com/uploads/places/65e8b86da744a/1709750398_3741bca4d3b09e216649.jpeg" alt="" onclick="openLightbox(10)">
+                        </div>
+                        <div class="slider-item">
+                            <img src="https://wikiway.com/upload/iblock/564/14_Teshebskie-vodopady-.jpg" alt="" onclick="openLightbox(11)">
+                        </div>
+                        <div class="slider-item">
+                            <img src="https://ic.pics.livejournal.com/capi4ca/12437940/11440792/11440792_800.jpg" alt="" onclick="openLightbox(12)">
+                        </div>
+                        <div class="slider-item">
+                            <img src="./8c55b192-e026-44e7-8364-0c63ad06c4c0.jfif" alt="" onclick="openLightbox(13)">
+                        </div>
+                        <div class="slider-item">
+                            <img src="./d9970a84-6efa-4f54-8eff-d666dc20d342.jfif" alt="" onclick="openLightbox(14)">
+                        </div>
+                        <div class="slider-item">
+                            <img src="./ed2cebaa-4ba0-4126-8c39-185763881f1e.jfif" alt="" onclick="openLightbox(15)">
+                        </div>
+                    </div>
+                    <button class="slider-arrow prev" onclick="changeSlide(-1)">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="slider-arrow next" onclick="changeSlide(1)">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="slider-controls" id="sliderControls"></div>
+                </div>
+
+                <!-- Desktop Gallery Grid -->
                 <div class="gallery-grid" style="margin-bottom: 3rem;">
                     <div class="gallery-item">
-                        <img src="./photo_5424685901675174729_y.jpg" alt="Закат на море">
+                        <img src="./photo_5424685901675174729_y.jpg" alt="Закат на море" onclick="openLightbox(0)">
                     </div>
                     <div class="gallery-item">
-                        <img src="./photo_5424685901675174730_y.jpg" alt="Парк развлечений">
+                        <img src="./photo_5424685901675174730_y.jpg" alt="Парк развлечений" onclick="openLightbox(1)">
                     </div>
                     <div class="gallery-item">
-                        <img src="https://s.101hotelscdn.ru/uploads/image/hotel_image/604573/6198509.jpg" alt="Пляж">
+                        <img src="https://s.101hotelscdn.ru/uploads/image/hotel_image/604573/6198509.jpg" alt="Пляж" onclick="openLightbox(2)">
                     </div>
                     <div class="gallery-item">
-                        <img src="./photo_5424685901675174733_y.jpg" alt="Горы и море">
+                        <img src="./photo_5424685901675174733_y.jpg" alt="Горы и море" onclick="openLightbox(3)">
                     </div>
                     <div class="gallery-item">
-                        <img src="./photo_5424890539686961591_x.jpg" alt="Дельфины">
+                        <img src="./photo_5424890539686961591_x.jpg" alt="Дельфины" onclick="openLightbox(4)">
                     </div>
                     <div class="gallery-item">
-                        <img src="https://i.ytimg.com/vi/fAUhIB5lL6E/maxresdefault.jpg" alt="Архипо-Осиповка">
+                        <img src="https://i.ytimg.com/vi/fAUhIB5lL6E/maxresdefault.jpg" alt="Архипо-Осиповка" onclick="openLightbox(5)">
                     </div>
                     <div class="gallery-item">
-                        <img src="https://avatars.mds.yandex.net/get-vertis-journal/4080458/14124124142412.jpg_1713271282863/orig">
+                        <img src="https://avatars.mds.yandex.net/get-vertis-journal/4080458/14124124142412.jpg_1713271282863/orig" onclick="openLightbox(6)">
                     </div>
                     <div class="gallery-item">
-                        <img src="https://otel-more.com/files/2015/10/arhipo-osipovka-center.jpg">
+                        <img src="https://otel-more.com/files/2015/10/arhipo-osipovka-center.jpg" onclick="openLightbox(7)">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://gelpriboy.ru/wp-content/uploads/2024/08/20240728094811_img_1606.jpg" onclick="openLightbox(8)">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./252d7ad7-04d9-4763-8bad-61bbc96d1d7f.jfif" onclick="openLightbox(9)">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://api.geometki.com/uploads/places/65e8b86da744a/1709750398_3741bca4d3b09e216649.jpeg" onclick="openLightbox(10)">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://wikiway.com/upload/iblock/564/14_Teshebskie-vodopady-.jpg" onclick="openLightbox(11)">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://ic.pics.livejournal.com/capi4ca/12437940/11440792/11440792_800.jpg" alt="" onclick="openLightbox(12)">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./8c55b192-e026-44e7-8364-0c63ad06c4c0.jfif" alt="" onclick="openLightbox(13)">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./d9970a84-6efa-4f54-8eff-d666dc20d342.jfif" alt="" onclick="openLightbox(14)">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./ed2cebaa-4ba0-4126-8c39-185763881f1e.jfif" alt="" onclick="openLightbox(15)">
                     </div>
                 </div>
             </div>
@@ -1679,7 +2040,7 @@
 
             <div class="hotel-detail-header">
                 <h1>Гостевой дом "Ландария"</h1>
-                <p>Тихий отдых в Архипо-Осиповке (шведский стол за небольшую плату)</p>
+                <p>Тихий отдых в Архипо-Осиповке (шведский стол за небольшую доплату)</p>
             </div>
 
             <div class="action-buttons">
@@ -1697,7 +2058,7 @@
                 <h2>О гостевом доме</h2>
                 <p>
                     Гостевой дом "Ландария" расположен в тихом месте, где нет транзитного транспорта и шума. 
-                    Трёхэтажный дом состоит из комфортных номеров с удобствами. 
+                    Трёхэтажный дом состоит из комфортабельных номеров с удобствами. 
                     По дороге на пляж находятся продуктовые магазины, кафе, столовая и другие необходимые объекты инфраструктуры. 
                     На набережной есть парк аттракционов, аквапарк и многое другое на любой вкус и возраст.
                 </p>
@@ -1706,23 +2067,23 @@
                     На территории расположена парковка для автомобилей, летняя оборудованная кухня и мангал. 
                     Гладильная доска и утюг предоставляются при необходимости.
                 </p>
-                <p style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1.5rem; border-radius: 10px; font-weight: 600; font-size: 1.1rem;">
+                <p style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1.5rem; border-radius: 10px; font-weight: 600; font-size: 1.15rem;">
                     <i class="fas fa-shuttle-van"></i>
-                    КАЖДЫЙ ЧАС ВАС БУДЕТ ПРИВОЗИТЬ НА МОРЕ И УВОЗИТЬ ОБРАТНО БЕСПЛАТНЫЙ ТРАНСФЕР!!! Шведский стол за небольшую плату
+                    КАЖДЫЙ ЧАС ВАС БУДЕТ ПРИВОЗИТЬ НА МОРЕ И УВОЗИТЬ ОБРАТНО БЕСПЛАТНЫЙ ТРАНСФЕР!!! Шведский стол на завтрак, обед и ужин за небольшую доплату
                 </p>
             </section>
 
             <section class="content-section">
                 <h2>Фотогалерея</h2>
                 <div class="gallery-grid">
-                    <div class="gallery-item"><img src="https://azur.ru/data/o/99/15299/1_5.jpg?1531485892" alt="Фото 1"></div>
-                    <div class="gallery-item"><img src="https://azur.ru/data/o/99/15299/4.jpg?1531485893" alt="Фото 2"></div>
-                    <div class="gallery-item"><img src="https://azur.ru/data/o/99/15299/001.jpg?1593680994" alt="Фото 3"></div>
-                    <div class="gallery-item"><img src="https://azur.ru/data/o/99/15299/003.jpg?1593681307" alt="Фото 4"></div>
-                    <div class="gallery-item"><img src="https://azur.ru/data/o/99/15299/005.jpg?1593681309" alt="Фото 5"></div>
-                    <div class="gallery-item"><img src="https://azur.ru/data/o/99/15299/007.jpg?1593681558" alt="Фото 6"></div>
-                    <div class="gallery-item"><img src="https://azur.ru/data/o/99/15299/1_3.jpg?1531485893" alt="Фото 7"></div>
-                    <div class="gallery-item"><img src="https://azur.ru/data/o/99/15299/1_7.jpg?1531485893" alt="Фото 8"></div>
+                    <div class="gallery-item"><img src="https://azur.ru/data/o/99/15299/1_5.jpg?1531485892" alt="Фото 1" onclick="openLightbox(0, 'landariya')"></div>
+                    <div class="gallery-item"><img src="https://azur.ru/data/o/99/15299/1_7.jpg?1531485893" alt="Фото 2" onclick="openLightbox(1, 'landariya')"></div>
+                    <div class="gallery-item"><img src="https://azur.ru/data/o/99/15299/001.jpg?1593680994" alt="Фото 3" onclick="openLightbox(2, 'landariya')"></div>
+                    <div class="gallery-item"><img src="https://azur.ru/data/o/99/15299/003.jpg?1593681307" alt="Фото 4" onclick="openLightbox(3, 'landariya')"></div>
+                    <div class="gallery-item"><img src="https://azur.ru/data/o/99/15299/005.jpg?1593681309" alt="Фото 5" onclick="openLightbox(4, 'landariya')"></div>
+                    <div class="gallery-item"><img src="https://azur.ru/data/o/99/15299/007.jpg?1593681558" alt="Фото 6" onclick="openLightbox(5, 'landariya')"></div>
+                    <div class="gallery-item"><img src="https://azur.ru/data/p/82/47382/th4/01.jpg?1585214342" alt="Фото 7" onclick="openLightbox(6, 'landariya')"></div>
+                    <div class="gallery-item"><img src="https://azur.ru/data/p/83/47383/th4/06.jpg?1585214341" alt="Фото 8" onclick="openLightbox(7, 'landariya')"></div>
                 </div>
             </section>
 
@@ -1758,6 +2119,7 @@
                         <li>Гладильная доска и утюг (по запросу)</li>
                         <li>Трансфер на пляж</li>
                         <li>Wi-Fi</li>
+                        <li>Шведский стол за небольшую доплату</li>
                     </ul>
                 </div>
             </div>
@@ -1798,32 +2160,32 @@
                 <div style="display: grid; gap: 1.5rem; margin-top: 1.5rem;">
                     <div style="background: var(--bg); padding: 1.5rem; border-radius: 15px; border-left: 4px solid var(--primary);">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
-                            <span style="font-weight: 700; font-size: 1.1rem; color: var(--text);">Елена</span>
-                            <span style="color: #FFD700; font-size: 1.1rem;">
+                            <span style="font-weight: 700; font-size: 1.15rem; color: var(--text);">Елена</span>
+                            <span style="color: #FFD700; font-size: 1.15rem;">
                                 <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                             </span>
                         </div>
-                        <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6; margin-bottom: 0.5rem;">
+                        <p style="color: var(--text-light); font-size: 1.05rem; line-height: 1.6; margin-bottom: 0.5rem;">
                             Рекомендую. Очень важный момент это столовая на территории в виде шведского стола и не нужно бегать искать где кормить детей, и каждое утро не болит голова чтобы проснуться раньше и приготовить семье завтрак. Имеется трансфер выезд каждый час на море, в общем наша семья в восторге. Вай фай только моросит плохо ловит, но это не так важно.
                         </p>
-                        <span style="font-size: 0.9rem; color: var(--text-light); font-style: italic;">Август 2023</span>
+                        <span style="font-size: 0.95rem; color: var(--text-light); font-style: italic;">Август 2023</span>
                     </div>
                     <div style="background: var(--bg); padding: 1.5rem; border-radius: 15px; border-left: 4px solid var(--primary);">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
-                            <span style="font-weight: 700; font-size: 1.1rem; color: var(--text);">Мария</span>
-                            <span style="color: #FFD700; font-size: 1.1rem;">
+                            <span style="font-weight: 700; font-size: 1.15rem; color: var(--text);">Мария</span>
+                            <span style="color: #FFD700; font-size: 1.15rem;">
                                 <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                             </span>
                         </div>
-                        <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6; margin-bottom: 0.5rem;">
+                        <p style="color: var(--text-light); font-size: 1.05rem; line-height: 1.6; margin-bottom: 0.5rem;">
                             Прекрасный гостевой дом! Отличный персонал! Кухня отменная! Хозяева супер! В общем всё понравилось! Обязательно приедим на следующий год! И отдельное спасибо администратору Сергею!
                         </p>
-                        <span style="font-size: 0.9rem; color: var(--text-light); font-style: italic;">Июль 2024</span>
+                        <span style="font-size: 0.95rem; color: var(--text-light); font-style: italic;">Июль 2024</span>
                     </div>
                 </div>
             </section>
 
-            <section class="content-section">
+            <section class="content-section" id="contacts">
                 <h2>Контакты и расположение</h2>
                 <div class="contact-grid">
                     <div class="contact-item">
@@ -1837,8 +2199,8 @@
                 </div>
                 <div style="margin-top: 2rem; text-align: center; padding: 2rem; background: var(--bg); border-radius: 15px;">
                     <h4 style="margin-bottom: 1rem;"><i class="fas fa-map-marker-alt"></i> Адрес</h4>
-                    <p style="font-size: 1.1rem; color: var(--text); font-weight: 600;">Архипо-Осиповка, пер. Дружный, 3</p>
-                    <p style="margin-top: 1rem; color: var(--text-light); font-size: 1rem;"><i class="fas fa-route"></i> 350 метров до моря</p>
+                    <p style="font-size: 1.15rem; color: var(--text); font-weight: 600;">Архипо-Осиповка, пер. Дружный, 3</p>
+                    <p style="margin-top: 1rem; color: var(--text-light); font-size: 1.05rem;"><i class="fas fa-route"></i> 350 метров до моря</p>
                 </div>
                 <div class="map-container">
                     <div class="map-wrapper">
@@ -1847,6 +2209,7 @@
                 </div>
             </section>
         </div>
+
 
         <!-- Granat Page -->
         <div id="granat" class="page">
@@ -1885,7 +2248,7 @@
                     На территории гостевого дома есть бассейн для отдыха, парковка для автомобилей и оборудованная зона с мангалом. 
                     Все номера оснащены кондиционерами, телевизорами, холодильниками и всем необходимым для комфортного проживания.
                 </p>
-                <p style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1.5rem; border-radius: 10px; font-weight: 600; font-size: 1.1rem;">
+                <p style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1.5rem; border-radius: 10px; font-weight: 600; font-size: 1.15rem;">
                     <i class="fas fa-shuttle-van"></i>
                     КАЖДЫЙ ЧАС ВАС БУДЕТ ПРИВОЗИТЬ НА МОРЕ И УВОЗИТЬ ОБРАТНО БЕСПЛАТНЫЙ ТРАНСФЕР!!!
                 </p>
@@ -1894,14 +2257,14 @@
             <section class="content-section">
                 <h2>Фотогалерея</h2>
                 <div class="gallery-grid">
-                    <div class="gallery-item"><img src="https://azur.ru/data/o/63/25663/img_0613.jpg?1688546860" alt="Фото 1"></div>
-                    <div class="gallery-item"><img src="https://azur.ru/data/o/63/25663/img_0506.jpg?1688546841" alt="Фото 2"></div>
-                    <div class="gallery-item"><img src="https://azur.ru/data/o/63/25663/img_0596.jpg?1688546848" alt="Фото 3"></div>
-                    <div class="gallery-item"><img src="https://azur.ru/data/o/63/25663/img_0600.jpg?1688546851" alt="Фото 4"></div>
-                    <div class="gallery-item"><img src="https://azur.ru/data/o/63/25663/img_0623.jpg?1688546867" alt="Фото 5"></div>
-                    <div class="gallery-item"><img src="https://azur.ru/data/o/63/25663/img_0568.jpg?1688552505" alt="Фото 6"></div>
-                    <div class="gallery-item"><img src="https://azur.ru/data/p/82/80782/th4/img_0486.jpg?1688599211" alt="Фото 7"></div>
-                    <div class="gallery-item"><img src="https://azur.ru/data/p/81/80781/th4/img_0469.jpg?1689376810" alt="Фото 8"></div>
+                    <div class="gallery-item"><img src="https://azur.ru/data/o/63/25663/img_0613.jpg?1688546860" alt="Фото 1" onclick="openLightbox(0, 'granat')"></div>
+                    <div class="gallery-item"><img src="https://azur.ru/data/o/63/25663/img_0506.jpg?1688546841" alt="Фото 2" onclick="openLightbox(1, 'granat')"></div>
+                    <div class="gallery-item"><img src="https://azur.ru/data/o/63/25663/img_0596.jpg?1688546848" alt="Фото 3" onclick="openLightbox(2, 'granat')"></div>
+                    <div class="gallery-item"><img src="https://azur.ru/data/o/63/25663/img_0600.jpg?1688546851" alt="Фото 4" onclick="openLightbox(3, 'granat')"></div>
+                    <div class="gallery-item"><img src="https://azur.ru/data/o/63/25663/img_0623.jpg?1688546867" alt="Фото 5" onclick="openLightbox(4, 'granat')"></div>
+                    <div class="gallery-item"><img src="https://azur.ru/data/o/63/25663/img_0568.jpg?1688552505" alt="Фото 6" onclick="openLightbox(5, 'granat')"></div>
+                    <div class="gallery-item"><img src="https://azur.ru/data/p/82/80782/th4/img_0486.jpg?1688599211" alt="Фото 7" onclick="openLightbox(6, 'granat')"></div>
+                    <div class="gallery-item"><img src="https://azur.ru/data/p/81/80781/th4/img_0469.jpg?1689376810" alt="Фото 8" onclick="openLightbox(7, 'granat')"></div>
                 </div>
             </section>
 
@@ -1935,7 +2298,7 @@
                         <li>Парковка для автомобилей</li>
                         <li>Зона барбекю с мангалом</li>
                         <li>Wi-Fi на всей территории</li>
-                        <li>Трансфер до пляжа</li>
+                        <li>Трансфер на пляж</li>
                         <li>Близость к центру курорта</li>
                     </ul>
                 </div>
@@ -1977,32 +2340,32 @@
                 <div style="display: grid; gap: 1.5rem; margin-top: 1.5rem;">
                     <div style="background: var(--bg); padding: 1.5rem; border-radius: 15px; border-left: 4px solid #4facfe;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
-                            <span style="font-weight: 700; font-size: 1.1rem; color: var(--text);">Наталья</span>
-                            <span style="color: #FFD700; font-size: 1.1rem;">
+                            <span style="font-weight: 700; font-size: 1.15rem; color: var(--text);">Наталья</span>
+                            <span style="color: #FFD700; font-size: 1.15rem;">
                                 <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                             </span>
                         </div>
-                        <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6; margin-bottom: 0.5rem;">
+                        <p style="color: var(--text-light); font-size: 1.05rem; line-height: 1.6; margin-bottom: 0.5rem;">
                             Только уехали и решили сразу оставить отзыв. Прекрасно отдохнули в Гранате. Все понравилось, продумано в апартаментах все до мелочей и очень стильно. Удобные кровати, высыпались за меньшее, чем обычно время. Вместительные шкафы и комоды, много места для хранения вещей. Красивые балконы, в первый вечер пили кофе и чай на нем и любовались видом. Кухня-гостиная большая, есть вся необходимая посуда и для приготовления и для сервировки. С кухней очень удобно для семей с детьми, особенно, если ребенок привередлив в еде как наш. Есть электр. чайник, микроволновка, холодильник и электрическая варочная панель. Просторный санузел, в котором есть стиральная машина и фен. Напор воды в душе отличный, что очень было важно для меня из-за длинных волос. Есть сушилка, мы выносили на балкон и белье высыхало а пару часов. Есть гладильная доска и утюг. В каждой комнате кондиционер и телевизор с основными каналами. В кухне-гостиной большие окна, мы через них смотрели на полную луну. Диван на кухне раскладывается. На улице чистый бассейн, частенько мы плавали одни, соседние номера друг друга не беспокоили. Есть туалет рядом с бассейном. Парковка на территории, что тоже очень важно. Есть мангал, шампура и решетки. На улице беседка со столами. В шаговой доступности разные магазины. Трансфер до Прохоровского пляжа (Правый мыс) организован. Горничная Наталья очень доброжелательная! Иван и Юлия очень постарались, вложили душу в этот гостевой дом. Приезжайте, не пожалеете!
                         </p>
-                        <span style="font-size: 0.9rem; color: var(--text-light); font-style: italic;">Август 2025</span>
+                        <span style="font-size: 0.95rem; color: var(--text-light); font-style: italic;">Август 2025</span>
                     </div>
                     <div style="background: var(--bg); padding: 1.5rem; border-radius: 15px; border-left: 4px solid #4facfe;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
-                            <span style="font-weight: 700; font-size: 1.1rem; color: var(--text);">Алина</span>
-                            <span style="color: #FFD700; font-size: 1.1rem;">
+                            <span style="font-weight: 700; font-size: 1.15rem; color: var(--text);">Алина</span>
+                            <span style="color: #FFD700; font-size: 1.15rem;">
                                 <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                             </span>
                         </div>
-                        <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6; margin-bottom: 0.5rem;">
+                        <p style="color: var(--text-light); font-size: 1.05rem; line-height: 1.6; margin-bottom: 0.5rem;">
                             Все очень понравилось. Если бы не погода остались бы еще, т к в планах было 3-4 суток. Уютно, чисто, отличный персонал. Единственное хотелось бы бассейн с подогревом, не удалось в нем побывать ♀️. А так все отлично, на море добирались сами, но нам озвучили что есть транспорт. Поэтому мы довольны всем, еще вернемся!
                         </p>
-                        <span style="font-size: 0.9rem; color: var(--text-light); font-style: italic;">Август 2024</span>
+                        <span style="font-size: 0.95rem; color: var(--text-light); font-style: italic;">Август 2024</span>
                     </div>
                 </div>
             </section>
 
-            <section class="content-section">
+            <section class="content-section" id="contacts">
                 <h2>Контакты и расположение</h2>
                 <div class="contact-grid">
                     <div class="contact-item">
@@ -2016,8 +2379,8 @@
                 </div>
                 <div style="margin-top: 2rem; text-align: center; padding: 2rem; background: var(--bg); border-radius: 15px;">
                     <h4 style="margin-bottom: 1rem;"><i class="fas fa-map-marker-alt"></i> Адрес</h4>
-                    <p style="font-size: 1.1rem; color: var(--text); font-weight: 600;">Архипо-Осиповка, ул. Рабочая, 13</p>
-                    <p style="margin-top: 1rem; color: var(--text-light); font-size: 1rem;"><i class="fas fa-route"></i> 150 метров до моря</p>
+                    <p style="font-size: 1.15rem; color: var(--text); font-weight: 600;">Архипо-Осиповка, ул. Рабочая, 13</p>
+                    <p style="margin-top: 1rem; color: var(--text-light); font-size: 1.05rem;"><i class="fas fa-route"></i> 150 метров до моря</p>
                 </div>
                 <div class="map-container">
                     <div class="map-wrapper">
@@ -2055,7 +2418,7 @@
                 <p>
                     Гостевой дом "Речная заводь" расположен в живописном месте на берегу реки Вулан в Архипо-Осиповке. 
                     Это идеальное место для тех, кто ценит природу, тишину и уют. 
-                    Рядом с домом протекает река, где можно рыбачить или просто наслаждаться видами.
+                    Рядом с домом протекает река, где можно рыбачить, кататься на сапборде или просто наслаждаться видами.
                 </p>
                 <p>
                     Гостям предлагаются комфортные номера с кухнями, а также трёхкомнатный коттедж для больших компаний или семей. 
@@ -2066,19 +2429,22 @@
                     Дополнительно организуются морские прогулки на катере и рыбалка. 
                     До моря можно добраться пешком или на транспорте.
                 </p>
+                <p>
+                    Не далеко от гостиницы есть дельфинарий, аквапарк, парк аттракционов и множество других развлечений.
+                </p>
             </section>
 
             <section class="content-section">
                 <h2>Фотогалерея</h2>
                 <div class="gallery-grid">
-                    <div class="gallery-item"><img src="https://azur.ru/data/o/85/4385/dsc_0028-3.jpg?1653952031" alt="Фото 1"></div>
-                    <div class="gallery-item"><img src="https://azur.ru/data/o/85/4385/dsc_0045-10.jpg?1653952033" alt="Фото 2"></div>
-                    <div class="gallery-item"><img src="https://azur.ru/data/o/85/4385/dsc_0052-15.jpg?1624608982" alt="Фото 3"></div>
-                    <div class="gallery-item"><img src="https://azur.ru/data/o/85/4385/dsc_0035-6.jpg?1653952032" alt="Фото 4"></div>
-                    <div class="gallery-item"><img src="https://azur.ru/data/o/85/4385/dsc_0027-2.jpg?1653952031" alt="Фото 5"></div>
-                    <div class="gallery-item"><img src="https://azur.ru/data/o/85/4385/dsc_0040-1.jpg?1653952032" alt="Фото 6"></div>
-                    <div class="gallery-item"><img src="https://azur.ru/data/p/12/16612/th4/19-1.jpg?1585219682" alt="Фото 7"></div>
-                    <div class="gallery-item"><img src="https://azur.ru/data/p/16/16616/th4/21.jpg?1586298062" alt="Фото 8"></div>
+                    <div class="gallery-item"><img src="https://azur.ru/data/o/85/4385/dsc_0028-3.jpg?1653952031" alt="Фото 1" onclick="openLightbox(0, 'rechnaya')"></div>
+                    <div class="gallery-item"><img src="https://azur.ru/data/o/85/4385/dsc_0045-10.jpg?1653952033" alt="Фото 2" onclick="openLightbox(1, 'rechnaya')"></div>
+                    <div class="gallery-item"><img src="https://azur.ru/data/o/85/4385/dsc_0052-15.jpg?1624608982" alt="Фото 3" onclick="openLightbox(2, 'rechnaya')"></div>
+                    <div class="gallery-item"><img src="https://azur.ru/data/o/85/4385/dsc_0035-6.jpg?1653952032" alt="Фото 4" onclick="openLightbox(3, 'rechnaya')"></div>
+                    <div class="gallery-item"><img src="https://azur.ru/data/o/85/4385/dsc_0027-2.jpg?1653952031" alt="Фото 5" onclick="openLightbox(4, 'rechnaya')"></div>
+                    <div class="gallery-item"><img src="https://azur.ru/data/o/85/4385/dsc_0040-1.jpg?1653952032" alt="Фото 6" onclick="openLightbox(5, 'rechnaya')"></div>
+                    <div class="gallery-item"><img src="https://azur.ru/data/p/12/16612/th4/19-1.jpg?1585219682" alt="Фото 7" onclick="openLightbox(6, 'rechnaya')"></div>
+                    <div class="gallery-item"><img src="https://azur.ru/data/p/16/16616/th4/21.jpg?1586298062" alt="Фото 8" onclick="openLightbox(7, 'rechnaya')"></div>
                 </div>
             </section>
 
@@ -2154,32 +2520,32 @@
                 <div style="display: grid; gap: 1.5rem; margin-top: 1.5rem;">
                     <div style="background: var(--bg); padding: 1.5rem; border-radius: 15px; border-left: 4px solid #43e97b;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
-                            <span style="font-weight: 700; font-size: 1.1rem; color: var(--text);">Виталий</span>
-                            <span style="color: #FFD700; font-size: 1.1rem;">
+                            <span style="font-weight: 700; font-size: 1.15rem; color: var(--text);">Виталий</span>
+                            <span style="color: #FFD700; font-size: 1.15rem;">
                                 <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                             </span>
                         </div>
-                        <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6; margin-bottom: 0.5rem;">
+                        <p style="color: var(--text-light); font-size: 1.05rem; line-height: 1.6; margin-bottom: 0.5rem;">
                             Отдыхали в коттедже "Речная заводь" двумя семьями в августе 2024 года. Место просто замечательное, дом в отличном состоянии, мебель качественная, хозяева приветливые, все проблемы просто на раз решаются - только утром сказали, что сломался холодильник, после обеда уже новый привезли поставили. Плюсом скидка от Ивана на морские прогулки. Вечером в беседке на берегу реки под шашлычок шоу катеров, прибывающих на пристань. До моря центральный пляж 10-15 мин, но можно на другой пляж "Правый мыс" как пешком, так и на маршрутном электрокаре, там больше понравилось (море чище народу меньше). В общем нам все очень понравилось, рекомендую всем для отдыха! Надеюсь еще раз побываем здесь
                         </p>
-                        <span style="font-size: 0.9rem; color: var(--text-light); font-style: italic;">Июнь 2025</span>
+                        <span style="font-size: 0.95rem; color: var(--text-light); font-style: italic;">Июнь 2025</span>
                     </div>
                     <div style="background: var(--bg); padding: 1.5rem; border-radius: 15px; border-left: 4px solid #43e97b;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
-                            <span style="font-weight: 700; font-size: 1.1rem; color: var(--text);">Татьяна</span>
-                            <span style="color: #FFD700; font-size: 1.1rem;">
+                            <span style="font-weight: 700; font-size: 1.15rem; color: var(--text);">Татьяна</span>
+                            <span style="color: #FFD700; font-size: 1.15rem;">
                                 <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                             </span>
                         </div>
-                        <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6; margin-bottom: 0.5rem;">
+                        <p style="color: var(--text-light); font-size: 1.05rem; line-height: 1.6; margin-bottom: 0.5rem;">
                             Прекрасное место для отдыха! Комнаты чистые, просторные. Вид из окон на речку и горы. До моря пешей прогулкой минут 10. В шаговой доступности рынок, продуктовые магазины, кафе. Персонал не просто приветливый, а очень дружелюбный. Дядя Алик - отдельное уважение)! По любому вопросу был готов помочь.
                         </p>
-                        <span style="font-size: 0.9rem; color: var(--text-light); font-style: italic;">Август 2025</span>
+                        <span style="font-size: 0.95rem; color: var(--text-light); font-style: italic;">Август 2025</span>
                     </div>
                 </div>
             </section>
 
-            <section class="content-section">
+            <section class="content-section" id="contacts">
                 <h2>Контакты и расположение</h2>
                 <div class="contact-grid">
                     <div class="contact-item">
@@ -2193,8 +2559,8 @@
                 </div>
                 <div style="margin-top: 2rem; text-align: center; padding: 2rem; background: var(--bg); border-radius: 15px;">
                     <h4 style="margin-bottom: 1rem;"><i class="fas fa-map-marker-alt"></i> Адрес</h4>
-                    <p style="font-size: 1.1rem; color: var(--text); font-weight: 600;">Архипо-Осиповка, ул. Вишневая, 65</p>
-                    <p style="margin-top: 1rem; color: var(--text-light); font-size: 1rem;"><i class="fas fa-route"></i> 500 метров до моря</p>
+                    <p style="font-size: 1.15rem; color: var(--text); font-weight: 600;">Архипо-Осиповка, ул. Вишневая, 65</p>
+                    <p style="margin-top: 1rem; color: var(--text-light); font-size: 1.05rem;"><i class="fas fa-route"></i> 500 метров до моря</p>
                 </div>
                 <div class="map-container">
                     <div class="map-wrapper">
@@ -2211,18 +2577,16 @@
             <button class="modal-close" onclick="closeModal('booking-modal')">&times;</button>
             <div class="modal-header">
                 <h2>Бронирование номера</h2>
-                <p style="color: var(--text-light); margin-top: 0.5rem; font-size: 1rem;">Оставьте заявку, и мы свяжемся с вами для подтверждения</p>
             </div>
             <div class="modal-body">
                 <form id="booking-form">
                     <div class="form-group">
-                        <label>Ваше имя <span style="color: #e53e3e;">*</span></label>
+                        <label>Ваше имя *</label>
                         <input type="text" class="form-control" placeholder="Иван Иванов" required>
                     </div>
-                    
                     <div class="form-row">
                         <div class="form-group">
-                            <label>Телефон <span style="color: #e53e3e;">*</span></label>
+                            <label>Телефон *</label>
                             <input type="tel" class="form-control" placeholder="+7 (___) ___-__-__" required>
                         </div>
                         <div class="form-group">
@@ -2230,10 +2594,9 @@
                             <input type="email" class="form-control" placeholder="example@mail.ru">
                         </div>
                     </div>
-                    
                     <div class="form-row">
                         <div class="form-group">
-                            <label>Количество гостей <span style="color: #e53e3e;">*</span></label>
+                            <label>Количество гостей *</label>
                             <select class="form-control" required>
                                 <option value="">Выберите</option>
                                 <option value="1">1 гость</option>
@@ -2244,7 +2607,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Тип номера <span style="color: #e53e3e;">*</span></label>
+                            <label>Тип номера *</label>
                             <select class="form-control" required>
                                 <option value="">Выберите</option>
                                 <option value="Стандарт">Стандарт (3-местный)</option>
@@ -2253,17 +2616,14 @@
                             </select>
                         </div>
                     </div>
-                    
                     <div class="form-group">
                         <label>Желаемые даты заезда и выезда</label>
                         <textarea class="form-control" placeholder="Например: с 15 июля по 25 июля 2025" rows="2"></textarea>
                     </div>
-                    
                     <div class="form-group">
                         <label>Комментарий</label>
                         <textarea class="form-control" placeholder="Ваши пожелания или вопросы..."></textarea>
                     </div>
-                    
                     <button type="submit" class="btn btn-primary" style="width: 100%;">
                         <i class="fas fa-paper-plane"></i>
                         Отправить заявку
@@ -2279,31 +2639,27 @@
             <button class="modal-close" onclick="closeModal('review-modal')">&times;</button>
             <div class="modal-header">
                 <h2>Оставить отзыв</h2>
-                <p style="color: var(--text-light); margin-top: 0.5rem; font-size: 1rem;">Поделитесь впечатлениями о вашем отдыхе</p>
             </div>
             <div class="modal-body">
                 <form id="review-form">
                     <div class="form-group">
-                        <label>Ваше имя <span style="color: #e53e3e;">*</span></label>
+                        <label>Ваше имя *</label>
                         <input type="text" class="form-control" placeholder="Как вас зовут?" required>
                     </div>
-                    
                     <div class="form-group">
-                        <label>Оценка <span style="color: #e53e3e;">*</span></label>
-                        <div style="display: flex; gap: 0.5rem; font-size: 2rem;">
-                            <i class="far fa-star" style="cursor: pointer; color: #FFD700;"></i>
-                            <i class="far fa-star" style="cursor: pointer; color: #FFD700;"></i>
-                            <i class="far fa-star" style="cursor: pointer; color: #FFD700;"></i>
-                            <i class="far fa-star" style="cursor: pointer; color: #FFD700;"></i>
-                            <i class="far fa-star" style="cursor: pointer; color: #FFD700;"></i>
+                        <label>Оценка *</label>
+                        <div style="display: flex; gap: 0.5rem; font-size: 1.8rem;">
+                            <i class="far fa-star" style="cursor: pointer; color: #FBBF24;"></i>
+                            <i class="far fa-star" style="cursor: pointer; color: #FBBF24;"></i>
+                            <i class="far fa-star" style="cursor: pointer; color: #FBBF24;"></i>
+                            <i class="far fa-star" style="cursor: pointer; color: #FBBF24;"></i>
+                            <i class="far fa-star" style="cursor: pointer; color: #FBBF24;"></i>
                         </div>
                     </div>
-                    
                     <div class="form-group">
-                        <label>Ваш отзыв <span style="color: #e53e3e;">*</span></label>
+                        <label>Ваш отзыв *</label>
                         <textarea class="form-control" placeholder="Расскажите о вашем отдыхе..." rows="4" required></textarea>
                     </div>
-                    
                     <button type="submit" class="btn btn-primary" style="width: 100%;">
                         <i class="fas fa-paper-plane"></i>
                         Опубликовать отзыв
@@ -2311,6 +2667,23 @@
                 </form>
             </div>
         </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">
+            <i class="fas fa-times"></i>
+        </button>
+        <button class="lightbox-arrow prev" onclick="changeLightboxImage(-1)">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="lightbox-content">
+            <img src="" alt="" class="lightbox-img" id="lightboxImg">
+        </div>
+        <button class="lightbox-arrow next" onclick="changeLightboxImage(1)">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="lightbox-counter" id="lightboxCounter"></div>
     </div>
 
     <!-- Social Icons -->
@@ -2324,10 +2697,13 @@
         <a href="https://t.me/username" class="social-icon telegram" target="_blank" title="Telegram">
             <i class="fab fa-telegram-plane"></i>
         </a>
+        <a href="#" class="social-icon max" target="_blank" title="MAX">
+            <img src="https://mloads.com/uploads/posts/2025-07/max.webp" alt="MAX">
+        </a>
     </div>
 
     <!-- Footer -->
-    <footer class="main-footer">
+    <footer class="main-footer" id="footer">
         <div class="footer-content">
             <div class="footer-section">
                 <h3>Гостевые дома в Архипо-Осиповке</h3>
@@ -2335,14 +2711,14 @@
             </div>
             <div class="footer-section">
                 <h3>Наши дома</h3>
-                <a class="nav-link-footer" onclick="navigateTo('landariya')" style="cursor: pointer;">Ландария</a>
-                <a class="nav-link-footer" onclick="navigateTo('granat')" style="cursor: pointer;">Гранат</a>
-                <a class="nav-link-footer" onclick="navigateTo('rechnaya')" style="cursor: pointer;">Речная заводь</a>
+                <a class="nav-link-footer" onclick="navigateTo('landariya')" style="cursor: pointer; color: rgba(255,255,255,0.8);">Ландария</a>
+                <a class="nav-link-footer" onclick="navigateTo('granat')" style="cursor: pointer; color: rgba(255,255,255,0.8);">Гранат</a>
+                <a class="nav-link-footer" onclick="navigateTo('rechnaya')" style="cursor: pointer; color: rgba(255,255,255,0.8);">Речная заводь</a>
             </div>
             <div class="footer-section">
                 <h3>Контакты</h3>
-                <p><i class="fas fa-phone"></i> +7 (918) 051-85-11</p>
-                <p><i class="fas fa-phone"></i> +7 (918) 460-23-15</p>
+                <p><i class="fas fa-phone"></i> +7 (918) 051-85-11 (Юлия)</p>
+                <p><i class="fas fa-phone"></i> +7 (918) 460-23-15 (Иван)</p>
                 <p><i class="fas fa-envelope"></i> info@arkhipka.ru</p>
             </div>
             <div class="footer-section">
@@ -2350,6 +2726,10 @@
                 <a href="#"><i class="fab fa-whatsapp"></i> WhatsApp</a>
                 <a href="#"><i class="fab fa-vk"></i> ВКонтакте</a>
                 <a href="#"><i class="fab fa-telegram"></i> Telegram</a>
+                <a href="#" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                    <img src="https://mloads.com/uploads/posts/2025-07/max.webp" alt="MAX" style="width: 20px; height: 20px; object-fit: contain; border-radius: 4px; background: white; padding: 2px;">
+                    MAX
+                </a>
             </div>
         </div>
         <div class="footer-bottom">
@@ -2358,6 +2738,16 @@
     </footer>
 
     <script>
+        // Фиксация хедера при прокрутке
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('mainHeader');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
         // Mobile Menu Toggle
         function toggleMobileMenu() {
             const mobileMenu = document.getElementById('mobileMenu');
@@ -2365,9 +2755,20 @@
             document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
         }
 
+        // Scroll to Footer
+        function scrollToFooter() {
+            const footer = document.getElementById('footer');
+            if (footer) {
+                footer.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
         // Navigation
         document.querySelectorAll('.nav-link, .nav-link-footer').forEach(link => {
             link.addEventListener('click', function(e) {
+                if (this.getAttribute('onclick') && this.getAttribute('onclick').includes('scrollToFooter')) {
+                    return;
+                }
                 e.preventDefault();
                 const pageId = this.getAttribute('data-page');
                 if (pageId) {
@@ -2384,7 +2785,11 @@
             const targetPage = document.getElementById(pageId);
             if (targetPage) {
                 targetPage.classList.add('active');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // ПРОКРУТКА ВВЕРХ ТОЛЬКО ДЛЯ ГЛАВНОЙ СТРАНИЦЫ
+                if (pageId === 'home') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
             }
             
             document.querySelectorAll('.nav-link').forEach(link => {
@@ -2396,7 +2801,6 @@
             
             history.pushState(null, null, '#' + pageId);
             
-            // Close mobile menu if open
             const mobileMenu = document.getElementById('mobileMenu');
             if (mobileMenu && mobileMenu.classList.contains('active')) {
                 mobileMenu.classList.remove('active');
@@ -2421,7 +2825,6 @@
             }
         }
 
-        // Close modal on outside click
         document.querySelectorAll('.modal').forEach(modal => {
             modal.addEventListener('click', function(e) {
                 if (e.target === this) {
@@ -2430,13 +2833,81 @@
             });
         });
 
+        // Lightbox Functions
+        let currentLightboxIndex = 0;
+        let currentLightboxGallery = 'home';
+        let lightboxImages = [];
+
+        function getGalleryImages(gallery) {
+            const images = [];
+            if (gallery === 'home') {
+                const imgs = document.querySelectorAll('#scenic-photos .gallery-item img');
+                imgs.forEach(img => images.push(img.src));
+            } else {
+                const page = document.getElementById(gallery);
+                if (page) {
+                    const imgs = page.querySelectorAll('.gallery-item img');
+                    imgs.forEach(img => images.push(img.src));
+                }
+            }
+            return images;
+        }
+
+        function openLightbox(index, gallery = 'home') {
+            currentLightboxIndex = index;
+            currentLightboxGallery = gallery;
+            lightboxImages = getGalleryImages(gallery);
+            
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const lightboxCounter = document.getElementById('lightboxCounter');
+            
+            lightboxImg.src = lightboxImages[index];
+            lightboxCounter.textContent = `${index + 1} / ${lightboxImages.length}`;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function changeLightboxImage(direction) {
+            currentLightboxIndex += direction;
+            if (currentLightboxIndex < 0) {
+                currentLightboxIndex = lightboxImages.length - 1;
+            } else if (currentLightboxIndex >= lightboxImages.length) {
+                currentLightboxIndex = 0;
+            }
+            
+            const lightboxImg = document.getElementById('lightboxImg');
+            const lightboxCounter = document.getElementById('lightboxCounter');
+            
+            lightboxImg.src = lightboxImages[currentLightboxIndex];
+            lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${lightboxImages.length}`;
+        }
+
+        document.addEventListener('keydown', function(e) {
+            const lightbox = document.getElementById('lightbox');
+            if (lightbox.classList.contains('active')) {
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                } else if (e.key === 'ArrowLeft') {
+                    changeLightboxImage(-1);
+                } else if (e.key === 'ArrowRight') {
+                    changeLightboxImage(1);
+                }
+            }
+        });
+
         // Handle hash change
         window.addEventListener('hashchange', function() {
             const hash = window.location.hash.substring(1) || 'home';
             navigateTo(hash);
         });
 
-        // Initialize on load
         window.addEventListener('DOMContentLoaded', function() {
             const hash = window.location.hash.substring(1) || 'home';
             navigateTo(hash);
@@ -2455,7 +2926,6 @@
             closeModal('review-modal');
         });
 
-        // Close mobile menu on resize
         window.addEventListener('resize', function() {
             if (window.innerWidth > 992) {
                 const mobileMenu = document.getElementById('mobileMenu');
